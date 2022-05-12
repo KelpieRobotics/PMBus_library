@@ -7,7 +7,7 @@
 #include "PMBus.h"
 
 
-void set_addr(int device_addr){
+PMBus::PMBus(int device_addr){
   _device_addr = device_addr;
 }
 

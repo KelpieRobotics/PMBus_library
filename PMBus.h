@@ -11,7 +11,7 @@
 class PMBus
 {
     public:
-        void set_addr(int device_addr);
+        PMBus(int device_addr);
         unsigned int data_request(unsigned char device_addr, unsigned char command, int expected_length);
         float lin16_to_dec(unsigned int received_word, unsigned int exponent);
         float lin11_to_dec(unsigned int received_word);
