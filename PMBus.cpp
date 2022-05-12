@@ -6,6 +6,11 @@
 #include "Arduino.h"
 #include "PMBus.h"
 
+
+void set_addr(int device_addr){
+  _device_addr = device_addr;
+}
+
 unsigned int PMBus::data_request(unsigned char device_addr, unsigned char command, int expected_length)
 {
   unsigned char msb, lsb = 0;
@@ -61,38 +66,38 @@ float PMBus::lin16_to_dec(unsigned int received_word, unsigned int exponent){
 
 float PMBus::vin_request(){
     float vin = 0;
-    return vin = lin11_to_dec(data_request(127, 0x88, 2));
+    return vin = lin11_to_dec(data_request(_device_addr, 0x88, 2));
 }
 
 float PMBus::vout_request(){
     float vout = 0;
-    return vout = lin16_to_dec(data_request(127, 0x8B, 2), data_request(127, 0x20, 1));
+    return vout = lin16_to_dec(data_request(_device_addr, 0x8B, 2), data_request(_device_addr, 0x20, 1));
 }
 
 float PMBus::temp_request(){
     float temp = 0;
-    return temp = lin11_to_dec(data_request(127, 0x8D, 2));
+    return temp = lin11_to_dec(data_request(_device_addr, 0x8D, 2));
 }
 
 /*float PMBus::current_in_request(){
     float i_in = 0;
-    return i_in = lin11_to_dec(data_request(127, 0x89, 2));
+    return i_in = lin11_to_dec(data_request(_device_addr, 0x89, 2));
 }
 */
 
 float PMBus::current_out_request(){
     float i_out = 0;
-    return i_out = lin11_to_dec(data_request(127, 0x8C, 2));
+    return i_out = lin11_to_dec(data_request(_device_addr, 0x8C, 2));
 }
 
 /*float PMBus::power_in_request(){
     float p_in = 0;
-    return p_in = lin11_to_dec(data_request(127, 0x97, 2));
+    return p_in = lin11_to_dec(data_request(_device_addr, 0x97, 2));
 }
 */
 
 float PMBus::power_out_request(){
     float p_out = 0;
-    return p_out = lin11_to_dec(data_request(127, 0x96, 2));
+    return p_out = lin11_to_dec(data_request(_device_addr, 0x96, 2));
 }
 
